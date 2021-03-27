@@ -10,7 +10,7 @@ Global intHelpX, intHelpY
 Global MapArray
 MapArray := {}
 ; 設定ファイル読み込み（ShinGetaHelper.ini）
-IniRead, str_hotkey, %A_ScriptDir%\KanaHelper.ini, Main, HKey , +^k
+IniRead, strInvokeHotKey, %A_ScriptDir%\KanaHelper.ini, Main, InvokeHotKey , +^h
 IniRead, flg_log, %A_ScriptDir%\KanaHelper.ini, Main, EnableLog , 0
 IniRead, intInputX, %A_ScriptDir%\KanaHelper.ini, Main, InputX , 
 IniRead, intInputY, %A_ScriptDir%\KanaHelper.ini, Main, InputY , 
@@ -47,14 +47,13 @@ Else
 	intHelpY = YCenter
 }
 
-Hotkey, %str_hotkey%, ShowDialog
+Hotkey, %strInvokeHotKey%, ShowDialog
 Return
 
 ShowDialog:
-; +^h::
 	ime_mode := IME_GET()
 	IME_SET(0)
-	InputBox, UserInput, 配列ヘルパー, 入力方法を調べたい文字のローマ字を入力`n（括弧系はkakko、記号系はkigouと入力）`n`n連続した文字を入力する場合はスペースで区切る（例：ta n go）, , 300, 200, %intInputX%, %intInputY%
+	InputBox, UserInput, キーボード配列ヘルパー, 入力方法を調べたい文字のローマ字を入力`n（括弧系はkakko、記号系はkigouと入力）`n`n連続した文字を入力する場合はスペースで区切る（例：ta n go）, , 300, 200, %intInputX%, %intInputY%
 	IME_SET(ime_mode)
 	If (ErrorLevel = 0)
 	{
@@ -81,17 +80,17 @@ ShowDialog:
 		}
 		Gui Font, S9
 		Gui Add, Button,h0 w0 default , 閉じる
-		Gui Show, %intHelpX% %intHelpY% AutoSize, 配列ヘルパー
+		Gui Show, %intHelpX% %intHelpY% AutoSize, キーボード配列ヘルパー
 
 		return
 
 		Button閉じる:
-		Gui, submit,nohide
-		Gui, Destroy
+			Gui, submit,nohide
+			Gui, Destroy
 		return
 
 		GuiEscape:
-		Gui, Destroy
+			Gui, Destroy
 		Return
 
 	}
