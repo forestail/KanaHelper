@@ -40,7 +40,7 @@ Else
 
 If (intHelpY is integer)
 {
-	intHelpY = X%intHelpY%
+	intHelpY = Y%intHelpY%
 }
 Else
 {
